@@ -98,5 +98,10 @@ public class Thread extends Post
 		
 		return false;
 	}
+        
+        public int compareTopics(Thread other)
+        {
+            return this.topic.compareTo(other.topic);
+        }
 	
 }

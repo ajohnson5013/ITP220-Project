@@ -195,10 +195,11 @@ public class ForumDriver {
 		print("Enter a thread's number to read.");
 		print("Press 'r' to sort the threads by rating.");
 		print("Press 'd' to sort the threads by date.");
+                print("Press 't' to sort the threads by topic.");
 		print("Press 0 to go back.");
 		print("");
 		
-		inputs.setValidAlts(new String[]{"r", "d"});
+		inputs.setValidAlts(new String[]{"r", "d", "t"});
 		Thread selectedThread = inputs.chooseThread(threadList);
 		inputs.clearValidAlts();
 		
@@ -212,6 +213,10 @@ public class ForumDriver {
 			board.sortThreadsByDate();
 			viewThreads(threadList);
 			return;
+                case "t":
+                        board.sortThreadsByTopic();
+                        viewThreads(threadList);
+                        return;
 		default:
 			if (selectedThread == null)
 				return;
