@@ -4,7 +4,7 @@ package messageboaredv2.pkg1;
 
 import java.util.*;
 
-//Aaron: Note
+//Aaron: Note NOTe 2
 public class ForumDriver {
 	
 	private static MessageBoard board;
