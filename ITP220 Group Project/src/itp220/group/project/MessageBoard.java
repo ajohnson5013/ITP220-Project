@@ -44,6 +44,11 @@ public class MessageBoard
 		Collections.sort(threads);
 	}
 	
+        public void sortThreadsByTopic()
+        {
+            threads.sort(new ThreadTopicComparator());
+        }
+        
         @Override
 	public String toString()
 	{
