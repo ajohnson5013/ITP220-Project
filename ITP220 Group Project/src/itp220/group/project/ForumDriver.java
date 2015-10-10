@@ -60,7 +60,7 @@ public class ForumDriver {
 	
 	private static void loadData()
 	{
-		users.addUser(new RegularUser("Bob"));
+		users.addUser(new RegularUser("Bob", "itp220", 0));
 		users.addUser(new RegularUser("Dave"));
 		users.addUser(new RegularUser("Scott"));
 	}

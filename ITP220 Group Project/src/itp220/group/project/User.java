@@ -89,7 +89,7 @@ public abstract class User
 	{
 		// creates an MD5 hash of the input string so that the plaintext
 		// password is never stored anywhere. Basic digital security.
-		
+	/*	
 	   try 
 	   {
 	        MessageDigest md = MessageDigest.getInstance("MD5");
@@ -109,8 +109,8 @@ public abstract class User
 	   	{
 	   		//do nothing
 	    }
-	    
-	   return null;
+	  */  
+	   return md5;
 	}
 	
 	public String getName()
