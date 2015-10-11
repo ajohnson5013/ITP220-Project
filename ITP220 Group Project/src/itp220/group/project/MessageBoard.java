@@ -79,6 +79,13 @@ public class MessageBoard
 		return results;
 	}
 	
+        public void deletePost(Post post)
+        {
+            for (Thread thread : threads)
+                if (thread.delete(post))
+                    return;
+        }
+        
 	public ArrayList<Thread> getThreadsByAuthor(User author)
 	{
 		ArrayList<Thread> results = new ArrayList<>();

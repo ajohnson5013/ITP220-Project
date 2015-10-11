@@ -12,6 +12,8 @@ import java.security.*;
 // anyhow since this is the kind of thing that got Target and other
 // large companies who've been hacked in trouble. --PK
 
+// ***EDIT: We've decided to forego the hashing just for simplicity. --PK
+
 public abstract class User 
 {
 	protected String name;
@@ -27,6 +29,14 @@ public abstract class User
 		this.passHash = null;
 	}
 	
+        public User(String name, String passHash)
+        {
+            setID();
+            this.name = name;
+            this.passHash = passHash;
+            isLoggedIn = false;
+        }
+        
 	public User(String name, String passHash, int ID)
 	{
 		this.name = name;
@@ -117,4 +127,9 @@ public abstract class User
 	{
 		return name;
 	}
+        
+        public boolean equals(User other)
+        {
+            return this.ID == other.ID;
+        }
 }

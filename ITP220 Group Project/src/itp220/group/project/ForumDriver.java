@@ -60,7 +60,7 @@ public class ForumDriver {
 	
 	private static void loadData()
 	{
-		users.addUser(new RegularUser("Bob", "itp220", 0));
+		users.addUser(new RegularUser("Bob", "itp220"));
 		users.addUser(new RegularUser("Dave"));
 		users.addUser(new RegularUser("Scott"));
 	}
@@ -238,7 +238,7 @@ public class ForumDriver {
 	private static void viewPosts(Thread thread)
 	{
 		//Basic instructions for users
-		print("Enter a post's number to rate.");
+		print("Enter a post's number to rate (or delete if you're the author)");
 		print("Press 'p' to post a reply.");
 		print("Press 'r' to sort by rating.");
 		print("Press 'd' to sort by date.");
@@ -281,19 +281,26 @@ public class ForumDriver {
 		}
 		
 		// If they've selected a post, rate it and then show the posts again.
-		ratePost(selectedPost);
+		rateOrDeletePost(selectedPost, thread);
 		viewPosts(thread);
 	}
 	
-	public static void ratePost(Post post)
+	public static void rateOrDeletePost(Post post, Thread thread)
 	{
 		final String UP = "Upvote";
 		final String DOWN = "Downvote";
-		
+		final String DELETE = "Delete post";
+                
 		if (!loginCheck())
 			return;
 		
-		String options[] = {UP, DOWN};
+                String options[];
+                if (!post.isAuthoredBy(users.getCurrentUser()) ||
+                        post.isThreadStarter(thread))
+                    options = new String[]{UP, DOWN}; 
+                else
+                    options = new String[]{UP, DOWN, DELETE};
+                
 		ArrayList<String> optionsList = new ArrayList<>(Arrays.asList(options));
 		
 		String choice = inputs.chooseOption(optionsList, "Press 0 to cancel.");
@@ -303,12 +310,36 @@ public class ForumDriver {
 			return;
 		
 		User user = users.getCurrentUser();
-		if (choice.equals(UP))
-			post.upVote(user);
-		else
-			post.downVote(user);
-	}
+                switch(choice)
+                {
+                    case UP:
+                        post.upVote(user);
+                        break;
+                    case DOWN:
+                        post.upVote(user);
+                        break;
+                    case DELETE:
+                        deletePost(post, user);
+                        break;
+                    default:
+                        //no default needed
+                }
+                
+        }
 	
+        private static void deletePost(Post post, User user)
+        {
+            final String YES = "Delete the post";
+            
+            print("Are you sure you want to delete your post?");
+            String choice = inputs.chooseOption(new ArrayList<>(Arrays.asList(YES)), "Press 0 to cancel.");
+            if (choice == null)
+                return;
+            
+            board.deletePost(post);
+            
+        }
+        
 	private static void createThread()
 	{
 		if (!loginCheck())

@@ -71,6 +71,17 @@ public class Thread extends Post
 		replies.add(new Post(author, content));
 	}
 	
+        public boolean delete(Post post)
+        {
+            if (replies.contains(post))
+            {
+                replies.remove(post);
+                return true;
+            }
+            
+            return false;
+        }
+        
 	public ArrayList<Post> getAllPosts()
 	{
 		ArrayList<Post> allPosts = new ArrayList<>();

@@ -16,7 +16,12 @@ public class RegularUser extends User
     {
             super(name);
     }
-
+    
+    public RegularUser(String name, String passHash)
+    {
+        super(name, passHash);
+    }
+    
     public RegularUser(String name, String passHash, int ID)
     {
             super(name, passHash, ID);

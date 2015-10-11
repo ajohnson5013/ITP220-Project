@@ -59,6 +59,23 @@ public class Post implements Comparable<Post>
 				"........................");
 	}
 	
+        public boolean equals(Post other)
+        {
+            if (!other.author.equals(this.author))
+                return false;
+            
+            if (!other.timeOfCreation.equals(this.timeOfCreation))
+                return false;
+            
+            return this.content.equals(other.content);
+        }
+        
+        public boolean isThreadStarter(Thread thread)
+        {
+            Post threadStarter = thread.asPost();
+            return threadStarter.equals(this);
+        }
+        
 	public String narrowContent(int width)
 	{
 		// This is the most complicated looking thing, but it basically keeps 
